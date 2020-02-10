@@ -1,0 +1,6 @@
+include flex_motion/example_configs/*.toml
+
+recursive-include flex_motion/lib/*
+recursive-include flex_motion/Release/*
+include flex_motion/_flex_motion_cffi.c
+include flex_motion/_flex_motion_cffi.cp37-win32.pyd

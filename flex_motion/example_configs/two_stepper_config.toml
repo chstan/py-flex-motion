@@ -1,0 +1,61 @@
+title = 'Example Motors Configuration'
+version = '0.0.1'
+date = '2020/1/1'
+notes = 'Example Motor Configuration for using PyFlexMotion'
+
+[flex_motion]
+  [flex_motion.A]
+  board_id = 0
+  limit_input_polarity = 'Inverting'
+  home_input_polarity = 'NonInverting'
+  halt_on_startup = true
+  enable_limits = true
+  enable_home_inputs = true
+
+  [[flex_motion.A.axes]]
+  velocity = 0
+  acceleration = 100
+  enabled = true
+
+  kind = 'Stepper'
+  step_size = 'FullStep'
+  step_mode = 'CWAndCCW'
+  step_polarity = 'NonInverting'
+  step_loop_mode = 'ClosedLoop'
+
+  allow_inhibit = true
+  inhibit_polarity = 'Inverting'
+
+  forward_limit = true
+  home_enabled = true
+  counts_per_rev = 2000
+  steps_per_rev = 2000
+
+  [flex_motion.A.axes.feedback]
+    primary = 0 # use encoder 0
+  [flex_motion.A.axes.output]
+    primary = 2 # use stepper output 2
+
+  [[flex_motion.A.axes]]
+  velocity = 0
+  acceleration = 100
+  enabled = true
+  allow_inhibit = false
+  kind = 'Stepper'
+  step_size = 'FullStep'
+  step_mode = 'StepAndDirection'
+  step_polarity = 'NonInverting'
+  [flex_motion.A.axes.feedback]
+    primary = 0 # use encoder 0
+  [flex_motion.A.axes.output]
+    primary = 2 # use stepper output 2
+
+  [flex_motion.A.axes.pid_constants]
+    kp = 20
+    ki = 1
+    ilim = 10
+    kd = 2
+    td = 0
+    kv = 0
+    aff = 0
+    vff = 0
