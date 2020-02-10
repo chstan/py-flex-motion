@@ -14,7 +14,8 @@ Have a look at the example configurations in `flex_motion/example_configurations
 
 ## Installing
 
-`pip install flex_motion` should work!
+`pip install flex_motion` should work, but I recommend `git clone` 
+followed by `pip install -e .` until I work out how to compile for other platforms.
 
 ## Getting Started
 
