@@ -1,2 +1,5 @@
 __pycache__
 .idea/
+
+dist/
+flex_motion.egg-info/
