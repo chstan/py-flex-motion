@@ -4,7 +4,7 @@ from typing import Union, List, Any
 
 from _flex_motion_cffi import ffi, lib
 
-from arpes_daq.motors_server.flex_config import *
+from .flex_config import *
 
 
 def axis_list_to_bitmap(axes: List[int]):

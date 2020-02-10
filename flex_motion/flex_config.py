@@ -2,7 +2,6 @@ from dataclasses import field, dataclass, InitVar, fields
 from enum import Enum, Flag
 from pathlib import Path
 from typing import List, Optional, Dict, Tuple
-from pprint import pprint
 import toml
 
 from _flex_motion_cffi import ffi, lib
@@ -37,7 +36,6 @@ __all__ = (
     'MotionStatus',
     'LimitType',
     'HomeDirection',
-    'HomeType',
     'LoopMode',
     'BoardStatus',
     'NIMCCammingEnableData',
@@ -547,7 +545,6 @@ def read_motor_configuration(path: Path):
         raw_config = toml.load(f)
 
     flex_config = raw_config.get('flex_motion')
-    pprint(flex_config['A']['axes'])
 
     flex_boards = {}
     for board_k, board in flex_config.items():
@@ -556,8 +553,6 @@ def read_motor_configuration(path: Path):
 
         board = BoardConfig(**board)
         board.axes = [AxisConfig(**axis) for axis in board.axes]
+        flex_boards[board_k] = board
 
-
-    pprint(flex_config)
-
-    return raw_config
+    return flex_boards

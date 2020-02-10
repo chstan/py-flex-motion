@@ -1,8 +1,12 @@
+from pathlib import Path
 from typing import Type, List, Tuple, Optional
 
-import arpes_daq.motors_server.flex_motion_low_level as ll
-from arpes_daq.motors_server.flex_config import BoardConfig, BoardStatus, AxisConfig, AccelerationAttrs, PID, AxisKind, \
-    LimitType
+import flex_motion.flex_motion_low_level as ll
+from flex_motion.flex_config import (
+    BoardConfig, BoardStatus, AxisConfig, AccelerationAttrs,
+    PID, AxisKind, LimitType,
+    read_motor_configuration,
+)
 
 
 class Axis:
@@ -85,8 +89,13 @@ class Board:
     config: BoardConfig
     axes: List[Axis]
 
-    def __init__(self, board_id, config):
-        self.board_id = board_id
+    @classmethod
+    def from_config(cls, path):
+        config = read_motor_configuration(Path(str(path)))
+        return {k: cls(c) for k, c in config.items()}
+
+    def __init__(self, config: BoardConfig):
+        self.board_id = config.board_id
         self.config = config
         self.axes = [Axis(board=self, axis_index=i, config=axis_config)
                      for i, axis_config in enumerate(self.config.axes)]
